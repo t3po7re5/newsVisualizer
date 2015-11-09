@@ -1,0 +1,57 @@
+<html>
+<head>
+	<title> Global Dashboard </title>
+	<script src="js/external.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+</head>
+<body>
+<div style="display:none;">
+	<img id="map" src="images/earth.jpg" alt="Earth">
+</div>
+	
+	<canvas id="title"></canvas>
+	<div id="sideBar" style="float:left;"><h3>This is the side bar </h3><br />
+		Story Item 1 listed here that has an associate circle <br />
+		Story Item 2 listed here <br />
+		<div id="newsItem1"></div>
+		<script>
+		window.onload = function()
+		{
+			console.log(newsItem.title); 
+		    var newsItem1 = document.getElementById('newsItem1');
+			newsItem1.innerHtml = 'New Text';//yourJSCodeHERE
+		}
+		</script>
+	</div>
+	<div id="dash" style="float:left;"><canvas id="myCanvas"></canvas> </div>
+	<script>
+	window.onload = function() {
+		var canvas = document.getElementById("myCanvas");
+		canvas.width = 2500;
+		canvas.height = 1000;
+		var ctx = canvas.getContext("2d");
+		var img = document.getElementById("map");
+		ctx.drawImage(img, 200,0);
+		var titleCanvas = document.getElementById("title");
+		titleCanvas.width = 2500;
+		titleCanvas.height = 50;
+		var ctx = titleCanvas.getContext("2d");
+		ctx.fillStyle = "#434343";
+		ctx.font = "30px Arial";
+		ctx.fillText("Global Dashboard",10,50);
+		ctx.fill();
+		drawCircle();
+	}
+
+	function drawCircle() {
+		var canvas = document.getElementById("myCanvas");
+		var ctx = canvas.getContext("2d");
+		ctx.beginPath();
+		ctx.arc(275,250, 100, 0, 2 * Math.PI, false);
+		ctx.fillStyle = "blue";
+		ctx.fill();
+	}
+	</script>
+
+</body>
+</html>
