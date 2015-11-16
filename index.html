@@ -1,29 +1,24 @@
 <html>
 <head>
 	<title> Global Dashboard </title>
-	<script src="js/external.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="css/external.css">
 </head>
-<body>
+<body ng-app="stories">
 <div style="display:none;">
 	<img id="map" src="images/earth.jpg" alt="Earth">
 </div>
 	
 	<canvas id="title"></canvas>
-	<div id="sideBar" style="float:left;"><h3>This is the side bar </h3><br />
-		Story Item 1 listed here that has an associate circle <br />
-		Story Item 2 listed here <br />
+	<div id="sideBar" style="float:left;" ng-controller="retrieveStories"><h3>This is the side bar </h3><br />
+		{{ test }}
+		<li ng-repeat="story in stories" style=":hover {font-size: 150%;} ">
+			{{ story }}
+		</li>
 		<div id="newsItem1"></div>
-		<script>
-		window.onload = function()
-		{
-			console.log(newsItem.title); 
-		    var newsItem1 = document.getElementById('newsItem1');
-			newsItem1.innerHtml = 'New Text';//yourJSCodeHERE
-		}
-		</script>
 	</div>
-	<div id="dash" style="float:left;"><canvas id="myCanvas"></canvas> </div>
+	<div id="dash" style="float:left;" ng-controller="mapStories"><canvas id="myCanvas"></canvas> </div>
 	<script>
 	window.onload = function() {
 		var canvas = document.getElementById("myCanvas");
@@ -41,6 +36,7 @@
 		ctx.fillText("Global Dashboard",10,50);
 		ctx.fill();
 		drawCircle();
+		drawCircle2();
 	}
 
 	function drawCircle() {
@@ -49,9 +45,10 @@
 		ctx.beginPath();
 		ctx.arc(275,250, 100, 0, 2 * Math.PI, false);
 		ctx.fillStyle = "blue";
+		ctx.globalAlpha = .5;
 		ctx.fill();
 	}
 	</script>
-
 </body>
+<script src="js/external.js"></script>
 </html>
