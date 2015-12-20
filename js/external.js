@@ -38,12 +38,11 @@ function drawCircle2() {
 	ctx2.fill();
 }
 
-//Input param should be id of circle, maybe reference object with this?
-function onCircleHover() {
-	// alert("Test");
-	document.getElementById("circle2").style.opacity = "1";
+//TODO: Change to gradual transition, use JQuery's fadeto method, http://www.w3schools.com/jquery/eff_fadeto.asp
+function onCircleHover(el) {
+	el.style.opacity = "1";
 }
 
-function onCircleLeave() {
-	document.getElementById("circle2").style.opacity = ".5";
+function onCircleLeave(el) {
+	el.style.opacity = ".5";
 }
