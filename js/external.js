@@ -37,3 +37,13 @@ function drawCircle2() {
 	ctx2.fillStyle = "green";
 	ctx2.fill();
 }
+
+//Input param should be id of circle, maybe reference object with this?
+function onCircleHover() {
+	// alert("Test");
+	document.getElementById("circle2").style.opacity = "1";
+}
+
+function onCircleLeave() {
+	document.getElementById("circle2").style.opacity = ".5";
+}
