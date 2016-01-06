@@ -1,0 +1,73 @@
+<html>
+<head>
+	<title> Global Dashboard </title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+	<script src="src/raphael.js"></script>
+	<script src="src/geomap.js"></script>
+</head>
+<body>
+
+
+	<div id="map" style="width:800px;height:380px;margin-top:40px;">
+		
+	</div>
+	<script>
+    var tooltip = $('#tooltip');
+
+    //实例化一个GeoMap对象
+    var map = new GeoMap({
+        //指定地图渲染位置
+        container: '#map',
+        //指定横纵缩放比
+        scale: {
+            x: 2.2,
+            y: 2.6
+        }
+    });
+
+    //ajax获取地图数据
+    $.ajax({
+        url: 'json/world.geo.json',
+        dataType: 'json'
+    }).done(function(json){
+        //地图对象加载数据
+        map.load(json);
+        //渲染
+        map.render();
+
+        map.shapes.hover(function(){
+            this.animate({'fill': '#08c', 'stroke': '#fff'}, 200);
+        }, function(){
+            this.animate({'fill': '#fff', 'stroke': '#999'}, 200);
+        })
+                .mousemove(function(e){
+                    e = $.event.fix(e);
+                    var self = this,
+                            top = e.pageY,
+                            left = e.pageX,
+                            box = map.container.offset(),
+                            boxTop = top - box.top,
+                            boxLeft = left - box.left,
+                    //获取鼠标位置的实际经纬度
+                            pos = map.getGeoPosition([boxLeft, boxTop]);
+
+                    tooltip.html(self.data('properties').name +
+                            '<br />指针坐标：<br />lng = ' +
+                            pos[0].toFixed(2) + '<br />lat = ' +
+                            pos[1].toFixed(2)).css({
+                        "top" : top,
+                        "left" : left + 10,
+                        "line-height" : "200%",
+                        "font-size": "12px"
+                    }).show();
+                }).mouseout(function(){
+                    tooltip.empty().hide();
+                });
+
+
+    });
+	</script>
+    
+
+</body>
+</html>

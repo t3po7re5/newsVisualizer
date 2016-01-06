@@ -5,13 +5,12 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular.min.js"></script>
 	<link rel="stylesheet" type="text/css" href="css/external.css">
 </head>
-<body ng-app="stories">
+<body ng-app="stories" ng-controller="retrieveStories">
 <div style="display:none;">
 	<img id="map" src="images/earth.jpg" alt="Earth">
 </div>
-	
 	<div id="container1">
-		<div id="headlines" style="float:left;" ng-controller="retrieveStories"><h3>This is the headlines bar </h3><br />
+		<div id="headlines" style="float:left;"><h3>This is the headlines bar </h3><br />
 			{{ test }}
 			<li ng-repeat="story in stories" style=":hover {font-size: 150%;} ">
 				{{ story }}
@@ -20,12 +19,22 @@
 		</div>
 	</div>
 	<div id="container2">
-		<div id="map"> 
+		<div id="map">
+			{{numberOfStories}}
+			<!-- Put ng-repeat in svg? or create a table? -->
 			<svg width="100%" height="100%">
 				<image xlink:href="images/earth.jpg" x="0" y="0" height="100%" width="100%"/>
 				<!-- Circle locations should be in %'s-->
-			 	<circle cx="50" cy="50" r="40" stroke="green" stroke-width="4" fill="yellow" opacity=".5"/>
-			 	<circle id="circle2" onmouseover="onCircleHover(this)" onmouseout="onCircleLeave(this)" cx="15%" cy="50%" r="2%" stroke="green" stroke-width="4" fill="red" opacity=".5"/>
+				<li ng-repeat="circle in circles">
+					{{circle.xPos}}
+					<circle cx="{{circle.xPos}}" cy="{{circle.yPos}}" r="40" stroke="green" stroke-width="4" fill="{{circle.color}}" onmouseover="onCircleHover(this)" onmouseout="onCircleLeave(this)" opacity=".5"/>
+
+				</li>
+				<!-- Loop through using angular loop then grab the properties of the circle -->
+			 	<!-- <circle cx="50" cy="50" r="40" stroke="green" stroke-width="4" fill="yellow" opacity=".5"/>
+				<circle cx="150" cy="150" r="40" stroke="green" stroke-width="4" fill="{{color}}" onmouseover="onCircleHover(this)" onmouseout="onCircleLeave(this)" opacity=".5"/>
+				<!-- <circle cx="{{circle.xPos}}" cy="{{circle.yPos}}" r="40" stroke="green" stroke-width="4" fill="{{circle.color}}" onmouseover="onCircleHover(this)" onmouseout="onCircleLeave(this)" opacity=".5"/> -->
+				<!-- <circle id="circle2" onmouseover="onCircleHover(this)" onmouseout="onCircleLeave(this)" cx="15%" cy="50%" r="2%" stroke="green" stroke-width="4" fill="red" opacity=".5"/> -->
 			</svg>
 		</div>
 		<div id="stats1"> Stats1 </div>
